@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - My Co2</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Co2</title>
+  <link rel="stylesheet" href="Co2.css">
+  <script src="co2.js"></script>
+</head>
+<body>
+
+<h2>My Co2</h2>
+
+<form id="carbonCalculator">
+  <label for="electricity">Consommation d'électricité (kWh) :</label>
+  <input type="number" id="electricity" name="electricity" required>
+
+  <label for="gas">Consommation de gaz (kWh) :</label>
+  <input type="number" id="gas" name="gas" required>
+
+  <label for="carDistance">Distance parcourue en voiture (km) :</label>
+  <input type="number" id="carDistance" name="carDistance" required>
+
+  <label for="trainDistance">Distance parcourue en train (km) :</label>
+  <input type="number" id="trainDistance" name="trainDistance" required>
+
+  <label for="flightDistance">Distance parcourue en avion (km) :</label>
+  <input type="number" id="flightDistance" name="flightDistance" required>
+
+  <label for="appliances">Nombre d'électroménagers :</label>
+  <input type="number" id="appliances" name="appliances" required>
+
+  <label for="electronics">Nombre d'appareils électroniques :</label>
+  <input type="number" id="electronics" name="electronics" required>
+
+  <label for="largeClothingPurchase">Achat de gros vêtements (kg) :</label>
+  <input type="number" id="largeClothingPurchase" name="largeClothingPurchase" required>
+
+  <label for="smallClothingPurchase">Achat de petits vêtements (kg) :</label>
+  <input type="number" id="smallClothingPurchase" name="smallClothingPurchase" required>
+
+
+  <label for="redMeatConsumption">Consommation de viande rouge (kg) :</label>
+  <input type="number" id="redMeatConsumption" name="redMeatConsumption" required>
+
+  <label for="whiteMeatConsumption">Consommation de viande blanche (kg) :</label>
+  <input type="number" id="whiteMeatConsumption" name="whiteMeatConsumption" required>
+
+  <label for="porkConsumption">Consommation de viande de porc (kg) :</label>
+  <input type="number" id="porkConsumption" name="porkConsumption" required>
+
+  <label for="bulkFoodPurchase">Achat d'aliments en vrac :</label>
+  <select id="bulkFoodPurchase" name="bulkFoodPurchase" required>
+    <option value="never">Jamais</option>
+    <option value="occasionally">Parfois</option>
+    <option value="regularly">Régulièrement</option>
+    <option value="always">Toujours</option>
+  </select>
+
+  <label for="housingType">Type de logement :</label>
+  <select id="housingType" name="housingType" required>
+    <option value="apartment">Appartement</option>
+    <option value="house">Maison</option>
+  </select>
+
+  <label for="housingSize">Taille du logement (m²) :</label>
+  <input type="number" id="housingSize" name="housingSize" required>
+
+  <label for="occupants">Nombre d'occupants :</label>
+  <input type="number" id="occupants" name="occupants" required>
+
+  <button type="button" onclick="calculateCarbon()">Calculer</button>
+</form>
+
+<div>
+  <p>Résultat: <span id="result">0</span> kg CO2</p>
+  <canvas id="carbonChart" width="400" height="200" aria-label="Hello ARIA World" role="img"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
