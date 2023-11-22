@@ -17,7 +17,7 @@ function calculateCarbon() {
     var largeClothingPurchase = parseFloat(document.getElementById("largeClothingPurchase").value);
     var smallClothingPurchase = parseFloat(document.getElementById("smallClothingPurchase").value);
 
-    // Facteurs d'émissions de carbone en kg de CO2 par unité
+    // Facteurs d'émissions de carbone en kg de CO2 par unité source; ADEME, GREENLY, RTE
     var emissionFactors = {
         electricity: 0.4,
         gas: 0.2,
@@ -76,7 +76,7 @@ function calculateCarbon() {
     var data = [transportEmissions, (housingEmissions + appliancesElectronicsEmissions), foodEmissions, clothingEmissions, emissionFactors.servicesCommuns];
 
     if (window.myChart) {
-        window.myChart.destroy(); // Détruire le graphique précédent
+        window.myChart.destroy(); 
     }
 
     window.myChart = new Chart(ctx, {
