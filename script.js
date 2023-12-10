@@ -23,7 +23,6 @@ function calculateCarbon() {
     var emissionFactors = {
         electricity: 0.4,
         gas: 0.2,
-        car: 0.12,   //petite voiture 0.104 / voiture moyenne 0.14 / grosse voiture 0.18
         train: 0.014,
         flight: 0.285,
         appliance: 0.1,
