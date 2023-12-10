@@ -4,18 +4,8 @@
   <meta charset="UTF-8">
   <title>My Co2</title>
   <link rel="stylesheet" href="./style.css">
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Co2</title>
-  <link rel="stylesheet" href="Co2.css">
-  <script src="co2.js"></script>
 </head>
 <body>
 
@@ -88,7 +78,7 @@
   <label for="occupants">Nombre d'occupants :</label>
   <input type="number" id="occupants" name="occupants" required>
 
-  <button type="button" onclick="calculateCarbon()">Calculer</button>
+  <button type="button" onclick="saveToLocalStorage(); calculateCarbon();">Calculer</button>
 </form>
 
 <div>
@@ -99,9 +89,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </body>
-</html>
 <!-- partial -->
   <script  src="./script.js"></script>
 
-</body>
+
 </html>

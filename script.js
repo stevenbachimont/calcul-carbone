@@ -65,7 +65,6 @@ function calculateCarbon() {
     var typecarFactor = getTypecarFactor(typecar);
     transportEmissions += (carDistance / caroccupants * typecarFactor);
 
-
     // Calcul des émissions de carbone pour les vêtements
     var clothingEmissions = (largeClothingPurchase * emissionFactors.clothing.large) +
         (smallClothingPurchase * emissionFactors.clothing.small);
@@ -137,5 +136,36 @@ function getTypecarFactor(selection) {
     }
 }   //petite voiture 0.104 / voiture moyenne 0.14 / grosse voiture 0.18
 
+
+function saveToLocalStorage() {
+    var formElements = document.getElementById("carbonCalculator").elements;
+    for (var i = 0; i < formElements.length; i++) {
+        if (formElements[i].type !== "button") {
+            localStorage.setItem(formElements[i].id, formElements[i].value);
+        }
+    }
+}
+
+document.getElementById("carbonCalculator").addEventListener("button", function(event) {
+    event.preventDefault(); // Empêche le rechargement de la page
+    saveToLocalStorage();
+    calculateCarbon(); // Vous pouvez également appeler la fonction calculateCarbon ici si vous le souhaitez
+});
+
+
+function loadFromLocalStorage() {
+    var formElements = document.getElementById("carbonCalculator").elements;
+    for (var i = 0; i < formElements.length; i++) {
+        if (formElements[i].type !== "button") {
+            if (localStorage.getItem(formElements[i].id)) {
+                formElements[i].value = localStorage.getItem(formElements[i].id);
+            }
+        }
+    }
+}
+
+window.onload = function() {
+    loadFromLocalStorage();
+}
 
 
