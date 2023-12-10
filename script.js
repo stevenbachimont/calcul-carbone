@@ -3,6 +3,8 @@ function calculateCarbon() {
     var electricity = parseFloat(document.getElementById("electricity").value);
     var gas = parseFloat(document.getElementById("gas").value);
     var carDistance = parseFloat(document.getElementById("carDistance").value);
+    var typecar = document.getElementById("typecar").value;
+    var caroccupants = parseFloat(document.getElementById("caroccupants").value);
     var trainDistance = parseFloat(document.getElementById("trainDistance").value);
     var flightDistance = parseFloat(document.getElementById("flightDistance").value);
     var appliances = parseFloat(document.getElementById("appliances").value);
@@ -17,13 +19,13 @@ function calculateCarbon() {
     var largeClothingPurchase = parseFloat(document.getElementById("largeClothingPurchase").value);
     var smallClothingPurchase = parseFloat(document.getElementById("smallClothingPurchase").value);
 
-    // Facteurs d'émissions de carbone en kg de CO2 par unité source; ADEME, GREENLY, RTE
+    // Facteurs d'émissions de carbone en kg de CO2 par unité source; ADEME, GREENLY, RTE, CARBO academy
     var emissionFactors = {
         electricity: 0.4,
         gas: 0.2,
-        car: 0.2,
-        train: 0.5,
-        flight: 0.25,
+        car: 0.12,   //petite voiture 0.104 / voiture moyenne 0.14 / grosse voiture 0.18
+        train: 0.014,
+        flight: 0.285,
         appliance: 0.1,
         electronic: 0.05,
         redMeat: 14,
@@ -33,13 +35,13 @@ function calculateCarbon() {
         house: 20,
         servicesCommuns: 1500,
         clothing: {
-            large: 20,
+            large: 27,   //pour vêtement français et 54 pour vêtement importé
             small: 10
         }
     };
 
     // Calcul des émissions de carbone pour chaque catégorie
-    var transportEmissions = (carDistance * emissionFactors.car) +
+    var transportEmissions =
         (trainDistance * emissionFactors.train) +
         (flightDistance * emissionFactors.flight);
 
@@ -59,6 +61,10 @@ function calculateCarbon() {
     // Ajout de l'impact de l'achat en vrac
     var bulkFoodPurchaseFactor = getBulkFoodPurchaseFactor(bulkFoodPurchase);
     foodEmissions *= bulkFoodPurchaseFactor;
+
+    var typecarFactor = getTypecarFactor(typecar);
+    transportEmissions += (carDistance / caroccupants * typecarFactor);
+
 
     // Calcul des émissions de carbone pour les vêtements
     var clothingEmissions = (largeClothingPurchase * emissionFactors.clothing.large) +
@@ -116,3 +122,20 @@ function getBulkFoodPurchaseFactor(selection) {
             return 1;
     }
 }
+
+// Fonction pour obtenir le facteur de type de véhicule en fonction de la sélection
+function getTypecarFactor(selection) {
+    switch (selection) {
+        case 'small':
+            return 0.1;
+        case 'medium':
+            return 0.14;
+        case 'big':
+            return 0.18;
+        default:
+            return 0.14;
+    }
+}   //petite voiture 0.104 / voiture moyenne 0.14 / grosse voiture 0.18
+
+
+
