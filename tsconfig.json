@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true
+  },
+  "exclude": [
+    "node_modules"
+  ],
+    "include": [
+        "src/**/*"
+    ]
+  "name": "myco2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install-types": "npm install --save-dev @types/chart.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

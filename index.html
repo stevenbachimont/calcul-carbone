@@ -12,11 +12,8 @@
 <h2>My Co2</h2>
 
 <form id="carbonCalculator">
-  <label for="electricity">Consommation d'électricité (kWh) :</label>
-  <input type="number" id="electricity" name="electricity" required>
 
-  <label for="gas">Consommation de gaz (kWh) :</label>
-  <input type="number" id="gas" name="gas" required>
+  <h2>Transports</h2>
 
   <label for="carDistance">Distance parcourue en voiture (km) :</label>
   <input type="number" id="carDistance" name="carDistance" required>
@@ -37,17 +34,33 @@
   <label for="flightDistance">Distance parcourue en avion (km) :</label>
   <input type="number" id="flightDistance" name="flightDistance" required>
 
+  <h2>Logement & Electroménagers</h2>
+
+  <label for="electricity">Consommation d'électricité (kWh) :</label>
+  <input type="number" id="electricity" name="electricity" required>
+
+  <label for="gas">Consommation de gaz (kWh) :</label>
+  <input type="number" id="gas" name="gas" required>
+
+  <label for="housingType">Type de logement :</label>
+  <select id="housingType" name="housingType" required>
+    <option value="apartment">Appartement</option>
+    <option value="house">Maison</option>
+  </select>
+
+  <label for="housingSize">Taille du logement (m²) :</label>
+  <input type="number" id="housingSize" name="housingSize" required>
+
+  <label for="occupants">Nombre d'occupants :</label>
+  <input type="number" id="occupants" name="occupants" required>
+
   <label for="appliances">Nombre d'électroménagers :</label>
   <input type="number" id="appliances" name="appliances" required>
 
   <label for="electronics">Nombre d'appareils électroniques :</label>
   <input type="number" id="electronics" name="electronics" required>
 
-  <label for="largeClothingPurchase">Achat de gros vêtements (kg) :</label>
-  <input type="number" id="largeClothingPurchase" name="largeClothingPurchase" required>
-
-  <label for="smallClothingPurchase">Achat de petits vêtements (kg) :</label>
-  <input type="number" id="smallClothingPurchase" name="smallClothingPurchase" required>
+  <h2>Alimentation</h2>
 
   <label for="redMeatConsumption">Consommation de viande rouge (kg) :</label>
   <input type="number" id="redMeatConsumption" name="redMeatConsumption" required>
@@ -66,17 +79,19 @@
     <option value="always">Toujours</option>
   </select>
 
-  <label for="housingType">Type de logement :</label>
-  <select id="housingType" name="housingType" required>
-    <option value="apartment">Appartement</option>
-    <option value="house">Maison</option>
+  <h2>Vêtements</h2>
+
+  <label for="largeClothingPurchase">Achat de gros vêtements (kg) :</label>
+  <input type="number" id="largeClothingPurchase" name="largeClothingPurchase" required>
+
+  <label for="smallClothingPurchase">Achat de petits vêtements (kg) :</label>
+  <input type="number" id="smallClothingPurchase" name="smallClothingPurchase" required>
+
+  <label for="madein">Vêtements "made in":</label>
+  <select id="madein" name="madein" required>
+    <option value="france">France</option>
+    <option value="autre">Autre</option>
   </select>
-
-  <label for="housingSize">Taille du logement (m²) :</label>
-  <input type="number" id="housingSize" name="housingSize" required>
-
-  <label for="occupants">Nombre d'occupants :</label>
-  <input type="number" id="occupants" name="occupants" required>
 
   <button type="button" onclick="saveToLocalStorage(); calculateCarbon();">Calculer</button>
 </form>

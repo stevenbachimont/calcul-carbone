@@ -1,26 +1,27 @@
 function calculateCarbon() {
     // Récupération des valeurs du formulaire
-    var electricity = parseFloat(document.getElementById("electricity").value);
-    var gas = parseFloat(document.getElementById("gas").value);
-    var carDistance = parseFloat(document.getElementById("carDistance").value);
-    var typecar = document.getElementById("typecar").value;
-    var caroccupants = parseFloat(document.getElementById("caroccupants").value);
-    var trainDistance = parseFloat(document.getElementById("trainDistance").value);
-    var flightDistance = parseFloat(document.getElementById("flightDistance").value);
-    var appliances = parseFloat(document.getElementById("appliances").value);
-    var electronics = parseFloat(document.getElementById("electronics").value);
-    var redMeatConsumption = parseFloat(document.getElementById("redMeatConsumption").value);
-    var whiteMeatConsumption = parseFloat(document.getElementById("whiteMeatConsumption").value);
-    var porkConsumption = parseFloat(document.getElementById("porkConsumption").value);
-    var housingType = document.getElementById("housingType").value;
-    var housingSize = parseFloat(document.getElementById("housingSize").value);
-    var bulkFoodPurchase = document.getElementById("bulkFoodPurchase").value;
-    var occupants = parseFloat(document.getElementById("occupants").value);
-    var largeClothingPurchase = parseFloat(document.getElementById("largeClothingPurchase").value);
-    var smallClothingPurchase = parseFloat(document.getElementById("smallClothingPurchase").value);
+    let electricity = parseFloat(document.getElementById("electricity").value);
+    let gas = parseFloat(document.getElementById("gas").value);
+    let carDistance = parseFloat(document.getElementById("carDistance").value);
+    let typecar = document.getElementById("typecar").value;
+    let caroccupants = parseFloat(document.getElementById("caroccupants").value);
+    let trainDistance = parseFloat(document.getElementById("trainDistance").value);
+    let flightDistance = parseFloat(document.getElementById("flightDistance").value);
+    let appliances = parseFloat(document.getElementById("appliances").value);
+    let electronics = parseFloat(document.getElementById("electronics").value);
+    let redMeatConsumption = parseFloat(document.getElementById("redMeatConsumption").value);
+    let whiteMeatConsumption = parseFloat(document.getElementById("whiteMeatConsumption").value);
+    let porkConsumption = parseFloat(document.getElementById("porkConsumption").value);
+    let housingType = document.getElementById("housingType").value;
+    let housingSize = parseFloat(document.getElementById("housingSize").value);
+    let bulkFoodPurchase = document.getElementById("bulkFoodPurchase").value;
+    let occupants = parseFloat(document.getElementById("occupants").value);
+    let madein = document.getElementById("madein").value;
+    let largeClothingPurchase = parseFloat(document.getElementById("largeClothingPurchase").value);
+    let smallClothingPurchase = parseFloat(document.getElementById("smallClothingPurchase").value);
 
     // Facteurs d'émissions de carbone en kg de CO2 par unité source; ADEME, GREENLY, RTE, CARBO academy
-    var emissionFactors = {
+    let emissionFactors = {
         electricity: 0.4,
         gas: 0.2,
         train: 0.014,
@@ -40,44 +41,47 @@ function calculateCarbon() {
     };
 
     // Calcul des émissions de carbone pour chaque catégorie
-    var transportEmissions =
+    let transportEmissions =
         (trainDistance * emissionFactors.train) +
         (flightDistance * emissionFactors.flight);
 
-    var housingEmissions = (electricity * emissionFactors.electricity / occupants) +
+    let typecarFactor = getTypecarFactor(typecar);
+    transportEmissions += (carDistance / caroccupants * typecarFactor);
+
+    let housingEmissions = (electricity * emissionFactors.electricity / occupants) +
         (gas * emissionFactors.gas / occupants) +
         (emissionFactors[housingType] * occupants * housingSize / occupants);
 
-    var redMeatEmissions = redMeatConsumption * emissionFactors.redMeat;
-    var whiteMeatEmissions = whiteMeatConsumption * emissionFactors.whiteMeat;
-    var porkEmissions = porkConsumption * emissionFactors.pork;
+    let redMeatEmissions = redMeatConsumption * emissionFactors.redMeat;
+    let whiteMeatEmissions = whiteMeatConsumption * emissionFactors.whiteMeat;
+    let porkEmissions = porkConsumption * emissionFactors.pork;
 
-    var foodEmissions = redMeatEmissions + whiteMeatEmissions + porkEmissions;
+    let foodEmissions = redMeatEmissions + whiteMeatEmissions + porkEmissions;
 
-    var appliancesElectronicsEmissions = (appliances * emissionFactors.appliance / occupants) +
+    let appliancesElectronicsEmissions = (appliances * emissionFactors.appliance / occupants) +
         (electronics * emissionFactors.electronic);
 
     // Ajout de l'impact de l'achat en vrac
-    var bulkFoodPurchaseFactor = getBulkFoodPurchaseFactor(bulkFoodPurchase);
+    let bulkFoodPurchaseFactor = getBulkFoodPurchaseFactor(bulkFoodPurchase);
     foodEmissions *= bulkFoodPurchaseFactor;
 
-    var typecarFactor = getTypecarFactor(typecar);
-    transportEmissions += (carDistance / caroccupants * typecarFactor);
-
     // Calcul des émissions de carbone pour les vêtements
-    var clothingEmissions = (largeClothingPurchase * emissionFactors.clothing.large) +
+    let clothingEmissions = (largeClothingPurchase * emissionFactors.clothing.large) +
         (smallClothingPurchase * emissionFactors.clothing.small);
 
+    let madeinFactor = getMadeinFactor(madein);
+    clothingEmissions *= madeinFactor;
+
     // Calcul du total des émissions de carbone
-    var totalEmissions = transportEmissions + (housingEmissions + appliancesElectronicsEmissions) + foodEmissions + clothingEmissions + emissionFactors.servicesCommuns;
+    let totalEmissions = transportEmissions + (housingEmissions + appliancesElectronicsEmissions) + foodEmissions + clothingEmissions + emissionFactors.servicesCommuns;
 
     // Affichage du résultat
     document.getElementById("result").textContent = totalEmissions.toFixed(2);
 
     // Création d'un graphique
-    var ctx = document.getElementById('carbonChart').getContext('2d');
-    var labels = ['Transport', 'Logement', 'Nourriture', 'Vêtements & électronique', 'Services Communs'];
-    var data = [transportEmissions, (housingEmissions + appliancesElectronicsEmissions), foodEmissions, clothingEmissions, emissionFactors.servicesCommuns];
+    let ctx = document.getElementById('carbonChart').getContext('2d');
+    let labels = ['Transport', 'Logement & Electroménagers', 'Alimentation', 'Vêtements', 'Services Communs'];
+    let data = [transportEmissions, (housingEmissions + appliancesElectronicsEmissions), foodEmissions, clothingEmissions, emissionFactors.servicesCommuns];
 
     if (window.myChart) {
         window.myChart.destroy(); 
@@ -135,10 +139,22 @@ function getTypecarFactor(selection) {
     }
 }   //petite voiture 0.104 / voiture moyenne 0.14 / grosse voiture 0.18
 
+// Fonction pour obtenir le facteur d'achat de vêtements made in france ou autre en fonction de la sélection
+function getMadeinFactor(selection) {
+    switch (selection) {
+        case 'france':
+            return 1;
+        case 'autre':
+            return 2;
+        default:
+            return 1;
+    }
+}
+
 
 function saveToLocalStorage() {
-    var formElements = document.getElementById("carbonCalculator").elements;
-    for (var i = 0; i < formElements.length; i++) {
+    let formElements = document.getElementById("carbonCalculator").elements;
+    for (let i = 0; i < formElements.length; i++) {
         if (formElements[i].type !== "button") {
             localStorage.setItem(formElements[i].id, formElements[i].value);
         }
@@ -153,8 +169,8 @@ document.getElementById("carbonCalculator").addEventListener("button", function(
 
 
 function loadFromLocalStorage() {
-    var formElements = document.getElementById("carbonCalculator").elements;
-    for (var i = 0; i < formElements.length; i++) {
+    let formElements = document.getElementById("carbonCalculator").elements;
+    for (let i = 0; i < formElements.length; i++) {
         if (formElements[i].type !== "button") {
             if (localStorage.getItem(formElements[i].id)) {
                 formElements[i].value = localStorage.getItem(formElements[i].id);
