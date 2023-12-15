@@ -164,7 +164,7 @@ function saveToLocalStorage() {
 document.getElementById("carbonCalculator").addEventListener("button", function(event) {
     event.preventDefault(); // Empêche le rechargement de la page
     saveToLocalStorage();
-    calculateCarbon(); // Vous pouvez également appeler la fonction calculateCarbon ici si vous le souhaitez
+    calculateCarbon(); 
 });
 
 
