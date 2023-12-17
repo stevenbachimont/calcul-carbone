@@ -75,6 +75,10 @@ function calculateCarbon() {
     // Calcul du total des émissions de carbone
     let totalEmissions = transportEmissions + (housingEmissions + appliancesElectronicsEmissions) + foodEmissions + clothingEmissions + emissionFactors.servicesCommuns;
 
+    let range = document.querySelector("input[type='range']");
+    range.value = Math.min(Math.max(totalEmissions, range.min), range.max);
+    setTemperature();
+
     // Affichage du résultat
     document.getElementById("result").textContent = totalEmissions.toFixed(2);
 
@@ -153,12 +157,18 @@ function getMadeinFactor(selection) {
 
 
 function saveToLocalStorage() {
-    let formElements = document.getElementById("carbonCalculator").elements;
-    for (let i = 0; i < formElements.length; i++) {
-        if (formElements[i].type !== "button") {
-            localStorage.setItem(formElements[i].id, formElements[i].value);
+    // Liste des formulaires à sauvegarder
+    let formIds = ["carbonCalculator1", "carbonCalculator2", "carbonCalculator3", "carbonCalculator4"];
+
+    // Boucle sur chaque formulaire
+    formIds.forEach(formId => {
+        let formElements = document.getElementById(formId).elements;
+        for (let i = 0; i < formElements.length; i++) {
+            if (formElements[i].type !== "button") {
+                localStorage.setItem(formElements[i].id, formElements[i].value);
+            }
         }
-    }
+    });
 }
 
 document.getElementById("carbonCalculator").addEventListener("button", function(event) {
@@ -169,18 +179,68 @@ document.getElementById("carbonCalculator").addEventListener("button", function(
 
 
 function loadFromLocalStorage() {
-    let formElements = document.getElementById("carbonCalculator").elements;
-    for (let i = 0; i < formElements.length; i++) {
-        if (formElements[i].type !== "button") {
-            if (localStorage.getItem(formElements[i].id)) {
-                formElements[i].value = localStorage.getItem(formElements[i].id);
+    // Liste des formulaires à charger
+    let formIds = ["carbonCalculator1", "carbonCalculator2", "carbonCalculator3", "carbonCalculator4"];
+
+    // Boucle sur chaque formulaire
+    formIds.forEach(formId => {
+        let formElements = document.getElementById(formId).elements;
+        for (let i = 0; i < formElements.length; i++) {
+            if (formElements[i].type !== "button") {
+                if (localStorage.getItem(formElements[i].id)) {
+                    formElements[i].value = localStorage.getItem(formElements[i].id);
+                }
             }
         }
-    }
+    });
 }
 
 window.onload = function() {
     loadFromLocalStorage();
 }
+
+//thermometre
+const units = {
+    true: "Kg Co2",
+};
+
+
+const config = {
+    minTemp: 0,
+    maxTemp: 10000,
+    unit: true,};
+
+
+
+
+const tempValueInputs = document.querySelectorAll("input[type='text']");
+
+tempValueInputs.forEach(input => {
+    input.addEventListener("change", event => {
+        const newValue = event.target.value;
+
+        if (isNaN(newValue)) {
+            return input.value = config[input.id];
+        } else {
+            config[input.id] = input.value;
+            range[input.id.slice(0, 3)] = config[input.id]; // Update range
+            return setTemperature(); // Update temperature
+        }
+    });
+});
+
+
+// Change temperature
+
+const range = document.querySelector("input[type='range']");
+const temperature = document.getElementById("temperature");
+
+function setTemperature() {
+    temperature.style.height = (range.value - config.minTemp) / (config.maxTemp - config.minTemp) * 100 + "%";
+    temperature.dataset.value = range.value + units[config.unit];
+}
+
+range.addEventListener("input", setTemperature);
+setTimeout(setTemperature, 2000);
 
 
