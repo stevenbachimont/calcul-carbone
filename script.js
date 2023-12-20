@@ -37,8 +37,8 @@ function calculateCarbon() {
         clothing: {
             large: 27,   //pour vêtement français et 54 pour vêtement importé
             small: 10
-        }
-    };
+        } //velo musculaire = 8/10g/km
+    }; //velo electrique = 15g/km pour 20000km + 181kg cycle devie
 
     // Calcul des émissions de carbone pour chaque catégorie
     let transportEmissions =
