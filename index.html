@@ -39,9 +39,10 @@
 
   <label for="flightDistance">Distance parcourue en avion (km) :</label>
   <input type="number" id="flightDistance" name="flightDistance" required>
+      </form>
     </div>
     </div>
-</form>
+
 
   <button id="btn2" class="modal-btn">Logement & Electroménagers</button>
     <div id="modal2" class="modal">
@@ -73,9 +74,10 @@
 
   <label for="electronics">Nombre d'appareils électroniques :</label>
   <input type="number" id="electronics" name="electronics" required>
+          </form>
         </div>
     </div>
-</form>
+
 
 <button id="btn3" class="modal-btn">Alimentation</button>
     <div id="modal3" class="modal">
@@ -100,9 +102,10 @@
     <option value="regularly">Régulièrement</option>
     <option value="always">Toujours</option>
   </select>
+          </form>
         </div>
     </div>
-</form>
+
 <button id="btn4" class="modal-btn">Vêtements</button>
     <div id="modal4" class="modal">
         <div class="modal-content">
@@ -121,9 +124,10 @@
     <option value="france">France</option>
     <option value="autre">Autre</option>
   </select>
+          </form>
         </div>
     </div>
-</form>
+
 <form id="carbonCalculator">
   <button type="button" onclick="saveToLocalStorage(); calculateCarbon();">Calculer</button>
 </form>
@@ -139,8 +143,8 @@
     <div id="graduations"></div>
   </div>
   <div id="objectif">
-    <p id="obj">Objectif</p>
-    <p id="obj">2000Kg Co2</p>
+    <p id="objTitle">Objectif</p>
+<p id="objValue">2000Kg Co2</p>
   </div>
 
   <div id="playground">

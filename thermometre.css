@@ -123,15 +123,12 @@
     width: auto;
 }
 
-#obj {
+#objTitle, #objValue {
     color: white;
 }
 
 #playground {
     display: none;
-}
-
-#playground {
     font-size: 1.1em;
 }
 
