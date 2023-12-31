@@ -9,6 +9,13 @@ body {
     min-height: 100vh;
 }
 
+header {
+    background-image: linear-gradient(to top, #1CB563, #38B485);
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
 button {
     background: linear-gradient(to right, #4CAF50, #45A049);
     color: #fff;

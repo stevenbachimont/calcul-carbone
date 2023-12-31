@@ -20,7 +20,7 @@ function calculateCarbon() {
     let largeClothingPurchase = parseFloat(document.getElementById("largeClothingPurchase").value);
     let smallClothingPurchase = parseFloat(document.getElementById("smallClothingPurchase").value);
 
-    // Facteurs d'émissions de carbone en kg de CO2 par unité source; ADEME, GREENLY, RTE, CARBO academy
+    // Facteurs d'émissions de carbone en kg de CO2 par unité source; ADEME, GREENLY, RTE, CARBO academy, Transport & Environnement (T&E)
     let emissionFactors = {
         electricity: 0.4,
         gas: 0.2,
@@ -38,7 +38,7 @@ function calculateCarbon() {
             large: 27,   //pour vêtement français et 54 pour vêtement importé
             small: 10
         } //velo musculaire = 8/10g/km
-    }; //velo electrique = 15g/km pour 20000km + 181kg cycle devie
+    }; //velo electrique = 15g/km pour 20000km + 181kg cycle de vie
 
     // Calcul des émissions de carbone pour chaque catégorie
     let transportEmissions =
