@@ -1,5 +1,5 @@
 
-FROM nginx:latest
+FROM alexellis2/visualizer-arm:latest
 
 
 RUN apt-get update && \
