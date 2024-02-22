@@ -20,7 +20,6 @@ function calculateCarbon() {
     let largeClothingPurchase = parseFloat(document.getElementById("largeClothingPurchase").value);
     let smallClothingPurchase = parseFloat(document.getElementById("smallClothingPurchase").value);
 
-    // Facteurs d'émissions de carbone en kg de CO2 par unité source; ADEME, GREENLY, RTE, CARBO academy, Transport & Environnement (T&E)
     let emissionFactors = {
         electricity: 0.4,
         gas: 0.2,
@@ -172,7 +171,7 @@ function saveToLocalStorage() {
 }
 
 document.getElementById("carbonCalculator").addEventListener("button", function(event) {
-    event.preventDefault(); // Empêche le rechargement de la page
+    event.preventDefault();
     saveToLocalStorage();
     calculateCarbon(); 
 });
